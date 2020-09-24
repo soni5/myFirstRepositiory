@@ -1,0 +1,16 @@
+
+module.exports = function add(x) {    
+    let sum =0       
+     if( typeof x == "function"){   
+                  x(sum);    
+        }      
+         sum = x;      
+         return function rtn(y) { 
+                if(!isNaN(y)) { 
+                 sum += y; 
+                return rtn;  
+           }  
+         if(typeof y == "function"){ 
+             y(sum);            }       
+        }
+     }

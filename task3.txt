@@ -1,0 +1,28 @@
+module.exports = function extractValuesForKey(object, searchKey) {
+    let resultMap = new Map();
+    searchForKey(object,searchKey,resultMap,new Array());
+     return resultMap;   
+}
+
+function searchForKey(object,searchKey,map,arr){
+    let keysArr = Object.keys(object);
+    let keyfound = false;
+    let depth = 0;
+    Object.entries(object).forEach(([key,value]) => {
+        let len =Object.keys(Object).length;
+        if(key == searchKey){
+            keyfound = true ;
+            map.set(arr.join('/'),value);
+        }
+        depth = depth + 1;
+        if(typeof object[key] === 'object'){
+            arr.push(key);
+            searchForKey(object[key],searchKey,map,arr);
+        }
+    });
+    if(keyfound == false){
+        for(let i = 0; i < depth ;i++){
+            arr.pop();
+        }
+    }
+}

@@ -1,0 +1,50 @@
+
+const app = require('./Task3.js')
+
+const someObject = {
+     uuid: 1,   
+     innerOne: {  
+          someKey: "some text" 
+    },    
+    innerTwo: {  
+        uuid: 2, 
+        innerThree: {   
+            someOtherKey: "some other text", 
+            innerFour: {  
+                uuid: 3  
+             }     
+        }    }
+    };
+    
+    let map1 = new Map();
+    map1.set("",1);
+    map1.set("innerTwo",2);
+    map1.set("innerTwo/innerThree/innerFour",3);
+
+    let map2 = new Map();
+    map2.set('someObject',1);
+    map2.set('someObject/innerTwo',2);
+    map2.set('someObject/innerTwo/innerThree/innerFour',3);
+
+    test('Map test 1', () =>{
+        let recivedMap = app({
+            uuid: 1,   
+            innerOne: {  
+                 someKey: "some text" 
+           },    
+           innerTwo: {  
+               uuid: 2, 
+               innerThree: {   
+                   someOtherKey: "some other text", 
+                   innerFour: {  
+                       uuid: 3  
+                    }     
+               }    }
+           },"uuid");
+        expect(recivedMap).toEqual(map1);
+    });
+
+    test('Second Map test with diffrent java object ' , () => {
+       let receivedMap = app({'someObject':someObject},'uuid');
+       expect(receivedMap).toEqual(map2);
+    })

@@ -1,0 +1,27 @@
+let sum = require('./Task2.js');
+
+test('should give output 0', () =>{
+    console.log = jest.fn();
+    sum(result =>{console.log("->", result)});
+    expect(console.log).toHaveBeenCalledWith("->", 0);
+});
+test('should give output 1', () =>{
+    console.log = jest.fn();
+    sum(1)(result => {console.log("->", result)});
+    expect(console.log).toHaveBeenCalledWith("->", 1);
+});
+test('should give output 3', () =>{
+    console.log = jest.fn();
+    sum(1)(2)(result => {console.log("->", result)});
+    expect(console.log).toHaveBeenCalledWith("->", 3);
+});
+test('should give output 7', () =>{
+    console.log = jest.fn();
+    sum(1)(2)(4)(result => {console.log("->", result)});
+    expect(console.log).toHaveBeenCalledWith("->", 7);
+});
+test('should give output 21', () =>{
+    console.log = jest.fn();
+    sum(1)(2)(3)(4)(5)(6)(result => {console.log("->", result)})
+    expect(console.log).toHaveBeenCalledWith("->", 21);
+});
