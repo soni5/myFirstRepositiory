@@ -1,0 +1,25 @@
+module.exports = function add(a){
+    let sum = 0;
+    if(typeof a == 'function'){       
+        a(sum);
+    }
+    sum = a;
+    return function addB(b){
+        if(typeof b == 'function'){
+            b(sum);
+       } 
+        sum +=b;
+            return function addC(c){
+                if(typeof c == 'function'){
+                    c(sum);
+                }
+                sum +=c;
+                return function rtn(n){
+                    if(typeof n == 'function'){
+                        n(sum);
+                    }
+                }
+            }
+        }    
+}
+
